@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://tonilsonrijo:toni1997@cluster0.qocv22p.mongodb.net/WebProMax', {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://tonilsonrijo:toni1997@cluster0.qocv22p.mongodb.net/judo-angola', {
       
     });
     console.log('MongoDB conectado com sucesso');
