@@ -19,7 +19,7 @@ require('dotenv').config();
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI, {
+        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://tonilsonrijo:toni1997@cluster0.qocv22p.mongodb.net/judo-angola', {
             serverSelectionTimeoutMS: 30000,
             socketTimeoutMS: 45000,
             family: 4, // FORÇA IPv4 - ESSENCIAL
