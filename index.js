@@ -1,16 +1,12 @@
-const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors');
 const connectDB = require('./src/config/database');
 
 dotenv.config();
 
 const app = require('./src/app');
 
+// conecta ao banco
 connectDB();
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+// exporta o app (ESSENCIAL)
+module.exports = app;

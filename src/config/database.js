@@ -1,15 +1,26 @@
 const mongoose = require('mongoose');
 
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
 const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://tonilsonrijo:toni1997@cluster0.qocv22p.mongodb.net/judo-angola', {
-      
-    });
-    console.log('MongoDB conectado com sucesso');
-  } catch (error) {
-    console.error('Erro ao conectar MongoDB:', error);
-    process.exit(1);
+  if (cached.conn) {
+    return cached.conn;
   }
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(
+      process.env.MONGODB_URI || 'mongodb+srv://tonilsonrijo:toni1997@cluster0.qocv22p.mongodb.net/judo-angola'
+    ).then((mongoose) => mongoose);
+  }
+
+  cached.conn = await cached.promise;
+  console.log('MongoDB conectado com sucesso');
+
+  return cached.conn;
 };
 
 module.exports = connectDB;
